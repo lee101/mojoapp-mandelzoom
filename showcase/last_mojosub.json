@@ -1,0 +1,9 @@
+{
+  "loop": "escape_loop",
+  "points": 200000,
+  "max_iter": 300,
+  "cpython_ms": 2274.1492530331016,
+  "mojosub_ms": 2365.5381749849766,
+  "speedup": 0.9613665410610186,
+  "outputs_match": true
+}

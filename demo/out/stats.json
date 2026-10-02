@@ -1,0 +1,97 @@
+{
+  "poster": {
+    "view": {
+      "cx": -0.743643887037151,
+      "cy": 0.13182590420533,
+      "scale": 0.0042,
+      "label": "seahorse valley"
+    },
+    "palette": "cosmic",
+    "width": 1280,
+    "height": 720,
+    "max_iter": 600,
+    "interior_pixels": 53836,
+    "interior_fraction": 0.058416,
+    "bytes": 525056
+  },
+  "zoom": {
+    "view": {
+      "cx": -0.743643887037151,
+      "cy": 0.13182590420533,
+      "scale": 0.0042,
+      "label": "seahorse valley"
+    },
+    "palette": "ember",
+    "width": 400,
+    "height": 225,
+    "frames": 20,
+    "factor": 1.3,
+    "delay_cs": 12,
+    "iters_per_frame": [
+      700,
+      740,
+      780,
+      820,
+      860,
+      900,
+      940,
+      980,
+      1020,
+      1060,
+      1100,
+      1140,
+      1180,
+      1220,
+      1260,
+      1300,
+      1340,
+      1380,
+      1420,
+      1460
+    ],
+    "max_iter": 1460,
+    "depth_ratio": 146.192,
+    "bytes": 1577782
+  },
+  "card": {
+    "view": {
+      "cx": -0.1592,
+      "cy": 1.0317,
+      "scale": 0.0085,
+      "label": "double spiral"
+    },
+    "palette": "inferno",
+    "width": 120,
+    "height": 34,
+    "max_iter": 400,
+    "bytes": 4632
+  },
+  "kernel": {
+    "simd_width": 4,
+    "default_workers": 16,
+    "par_min_pixels": 32768
+  },
+  "artifacts": [
+    "card.txt",
+    "poster.png",
+    "stats.json",
+    "zoom.gif",
+    "zoom.json"
+  ],
+  "timings": {
+    "note": "wall time on the machine that built this, not a claim about yours",
+    "poster_render_seconds": 0.2067,
+    "zoom_render_seconds": 1.0497,
+    "card_render_seconds": 0.0067
+  },
+  "calibration": {
+    "probe_pixels": 262144,
+    "probe_workers": 16,
+    "probe_iters": 300,
+    "serial_ns_per_pixel": 1140.442237757,
+    "parallel_ns_per_pixel": 144.58738339939714,
+    "parallel_wins_at_probe": true,
+    "launch_ns_per_frame": -261057374.94071946,
+    "threshold_pixels": 32768.0
+  }
+}

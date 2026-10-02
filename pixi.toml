@@ -1,0 +1,54 @@
+[workspace]
+authors = ["Lee Penkman <leepenkman@gmail.com>"]
+channels = [
+    "https://conda.modular.com/max-nightly",
+    "https://repo.prefix.dev/modular-community",
+    "conda-forge",
+]
+name = "mojoapp-mandelzoom"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+build = "bash build/build.sh"
+test = "python -m pytest tests -q"
+# Serialise against other benchmarks on the machine, but fail loudly instead of
+# waiting forever if one of them is stuck holding the lock. Kept on one line:
+# a multi-line task here is joined with newlines and the `{ ... }` fallback
+# stops parsing.
+bench = "flock -w 900 /tmp/mojo-bench.lock python bench/bench.py"
+demo = "python demo/make_demo.py"
+showcase = "python showcase/mojosub.py"
+# The mojojojo showcase needs a key; without one it prints a skip and exits 0.
+showcase-remote = "python showcase/mojojojo.py"
+# Refresh the SHA-256 digests in tests/test_golden.py. Read the diff.
+goldens = "python tests/record_goldens.py"
+
+[activation.env]
+PYTHONPATH = "python"
+
+[dependencies]
+mojo = "==1.2.0.dev2026092905"
+# `max` ships max.mojoc from <prefix>/lib/mojo. Without it the
+# `from max.algorithm import parallelize` import fails and the whole frame
+# renders serially. Released in lockstep with mojo.
+max = "==26.7.0.dev2026092905"
+python = "3.13.*"
+pytest = "*"
+numpy = "*"
+# pillow is a TEST dependency only. The encoders in
+# python/mojoapp_mandelzoom (png.py, gif.py) are hand-rolled and use nothing but
+# zlib and struct, so a Pillow upgrade cannot change a byte of published output;
+# Pillow is imported only to decode the demo artifacts in the tests.
+pillow = "*"
+
+# mojosub and mojojojo are both public but NOT on PyPI -- verified on the day
+# this file was written, pypi.org/pypi/mojosub/json and
+# pypi.org/pypi/mojojojo/json both return 404. They are declared from git so
+# `pixi install` pulls them when the network allows. If that install ever fails
+# the showcase scripts still work: they look for a local checkout via
+# MOJOSUB_PATH / MOJOJOJO_PATH, then a plain import, and skip with a message
+# naming the fix. Neither ever prints a speedup it did not measure.
+[pypi-dependencies]
+mojosub = { git = "https://github.com/lee101/mojosub.git" }
+mojojojo = { git = "https://github.com/lee101/mojojojo.git", subdirectory = "sdk/python" }
